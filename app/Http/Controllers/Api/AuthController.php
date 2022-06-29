@@ -5,9 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -26,14 +24,7 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password']),
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response()->json($response, 201);
+        return response()->json([], 204);
     }
 
     public function login(Request $request)
@@ -49,7 +40,14 @@ class AuthController extends Controller
         {
             return response()->json([
                 'error' => 'Invalid credentials',
-            ],401);
+            ], 401);
+        }
+
+        if($user->status !== 1)
+        {
+            return response()->json([
+                'error' => 'Inactive user, contact support',
+            ], 401);
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;

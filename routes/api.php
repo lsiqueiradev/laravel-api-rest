@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 //controllers
 use App\Http\Controllers\Api\{
-    AuthController
+    AuthController,
+    PasswordForgotController
 };
 
 /*
@@ -21,6 +22,7 @@ use App\Http\Controllers\Api\{
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('sessions', [AuthController::class, 'login']);
+Route::post('password/forgot', [PasswordForgotController::class, 'store']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
