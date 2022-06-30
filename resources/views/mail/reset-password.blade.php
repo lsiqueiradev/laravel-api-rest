@@ -17,7 +17,7 @@ Equipe Laravel Api Rest</p>
 
 <p>Se você estiver tendo problemas com o botão acima, copie e cole o URL abaixo em seu navegador da web.</p>
 
-<a href="{{ url("/password/reset/$token") }}">http://127.0.0.1:8000/password/reset/{{$token}}</a>
+<a href="{{ url("/password/reset/$token") }}">{{ url("/password/reset/$token") }}</a>
 
 @endcomponent
 
