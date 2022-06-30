@@ -4,7 +4,7 @@
 
 <p>Você solicitou recentemente a redefinição de sua senha para sua conta. Use o botão abaixo para redefini-lo. Essa redefinição de senha é válida apenas pelas próximas 2 horas.</p>
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/password/reset/'.$token])
+@component('mail::button', ['url' => url("/password/reset/$token")])
     Resetar minha senha
 @endcomponent
 
@@ -17,7 +17,7 @@ Equipe Laravel Api Rest</p>
 
 <p>Se você estiver tendo problemas com o botão acima, copie e cole o URL abaixo em seu navegador da web.</p>
 
-<a href="http://127.0.0.1:8000/password/reset/{{$token}}">http://127.0.0.1:8000/password/reset/{{$token}}</a>
+<a href="{{ url("/password/reset/$token") }}">http://127.0.0.1:8000/password/reset/{{$token}}</a>
 
 @endcomponent
 
