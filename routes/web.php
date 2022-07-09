@@ -17,12 +17,11 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/password/forgot', [PasswordForgotController::class, 'index'])->name('password-forgot.index');
 Route::post('password/forgot', [PasswordForgotController::class, 'store'])->name('password-forgot.store');
 Route::get('/password/reset/{token}', [PasswordResetController::class, 'index'])->name('password-reset.index');
 Route::post('password/reset', [PasswordResetController::class, 'store'])->name('password-reset.store');
 
+Route::fallback(function () {
+    return response()->json(['message' => 'Not Found'], 404);
+});

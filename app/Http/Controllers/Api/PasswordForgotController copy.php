@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\resetPassword;
+use App\Mail\sendResetPassword;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -26,11 +26,11 @@ class PasswordForgotController extends Controller
         $user['password_reset_expires'] = Carbon::now()->addHours(2);
 
 
-        Mail::send(new resetPassword($user, $token));
+        Mail::send(new sendResetPassword($user, $token));
 
         $user->save();
 
-        return response(['message' => 'Enviamos o link de redefinição de senha por e-mail!'], 201);
+        return response(['message' => 'We sent the password reset link via email!'], 201);
     }
 
 }

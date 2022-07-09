@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\resetPassword;
+use App\Mail\sendResetPassword;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -30,12 +30,12 @@ class PasswordForgotController extends Controller
         $user['password_reset_expires'] = Carbon::now()->addHours(2);
 
 
-        Mail::send(new resetPassword($user, $token));
+        Mail::send(new sendResetPassword($user, $token));
 
         $user->save();
 
         return redirect()->route('password-forgot.index')
-            ->with('success', 'Recuperação enviada com sucesso. Siga os passos enviado em seu email!');
+            ->with('success', 'Recovery sent successfully. Follow the steps sent in your email!');
     }
 
 }

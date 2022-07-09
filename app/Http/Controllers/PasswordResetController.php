@@ -17,7 +17,7 @@ class PasswordResetController extends Controller
             return redirect()
                 ->route('password-forgot.index')
                 ->withInput()
-                ->withErrors(['O token informado não é válido. Tente gerar um novo!']);
+                ->withErrors(['The token provided is not valid. Try generating a new one!']);
         }
 
         $now = Carbon::now();
@@ -26,7 +26,7 @@ class PasswordResetController extends Controller
             return redirect()
                 ->route('password-forgot.index')
                 ->withInput()
-                ->withErrors(['O token informado expirou. Tente gerar um novo!']);
+                ->withErrors(['The token entered has expired. Try generating a new one!']);
         }
 
         return view('auth.reset-password');
@@ -47,7 +47,7 @@ class PasswordResetController extends Controller
             return redirect()
             ->back()
             ->withInput()
-            ->withErrors(['O token informado não é válido. Tente gerar um novo!']);
+            ->withErrors(['The token provided is not valid. Try generating a new one!']);
         }
 
         $now = Carbon::now();
@@ -56,7 +56,7 @@ class PasswordResetController extends Controller
             return redirect()
             ->back()
             ->withInput()
-            ->withErrors(['O token informado expirou. Tente gerar um novo!']);
+            ->withErrors(['The token entered has expired. Try generating a new one!']);
         }
 
         $user['password_reset_token'] = null;
@@ -68,7 +68,7 @@ class PasswordResetController extends Controller
         $user->tokens()->delete();
 
         return redirect()->route('password-forgot.index')
-            ->with('success', 'Senha alterada com sucesso. Entre no app novamente!');
+            ->with('success', 'Password changed successfully. Enter the app again!');
     }
 
 }

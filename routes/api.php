@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 //controllers
 use App\Http\Controllers\Api\{
     AuthController,
-    PasswordForgotController
+    PasswordForgotController,
+    User2FACodeController
 };
 
 /*
@@ -22,6 +23,7 @@ use App\Http\Controllers\Api\{
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('sessions', [AuthController::class, 'login']);
+Route::post('sessions/2fa/authenticate/{user_id}', [User2FACodeController::class, 'store']);
 Route::post('password/forgot', [PasswordForgotController::class, 'store']);
 
 

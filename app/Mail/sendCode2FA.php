@@ -3,26 +3,28 @@
 namespace App\Mail;
 
 use App\Models\User;
+use App\Models\User2FACode;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class resetPassword extends Mailable
+class sendCode2FA extends Mailable
 {
     use Queueable, SerializesModels;
 
     private $user;
+    private $code;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, String $token)
+    public function __construct(User $user, User2FACode $code)
     {
         $this->user = $user;
-        $this->token = $token;
+        $this->code = $code;
     }
 
     /**
@@ -32,12 +34,12 @@ class resetPassword extends Mailable
      */
     public function build()
     {
-        $this->subject('Reset de senha');
+        $this->subject('Seu código de verificação de login do '. config('app.name'));
         $this->to($this->user->email, $this->user->name);
 
-        return $this->markdown('mail.reset-password', [
+        return $this->markdown('mail.2fa-code', [
             'user' => $this->user,
-            'token' => $this->token
+            'code' => $this->code,
         ]);
     }
 }

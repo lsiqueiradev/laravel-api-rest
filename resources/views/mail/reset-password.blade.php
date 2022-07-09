@@ -11,7 +11,7 @@
 <p>Por segurança, essa solicitação foi recebida de um dispositivo seguro. Se você não solicitou uma redefinição de senha, ignore este e-mail ou entre em contato com o suporte se tiver dúvidas.</p>
 
 <p>Obrigado <br>
-Equipe Laravel Api Rest</p>
+Equipe {{ config('app.name') }}</p>
 
 @component('mail::subcopy')
 
