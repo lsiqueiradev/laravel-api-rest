@@ -50,26 +50,26 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $return = User::generateCode($user->id);
+        // $return = User::generateCode($user->id);
 
-        if ($return) {
-            return response()->json([
-                'user_id' => $user->id
-            ], 200);
-        } else {
-            return response()->json([
-                'error' => 'There was a problem sending the code, please try again later!',
-            ], 401);
-        }
+        // if ($return) {
+        //     return response()->json([
+        //         'user_id' => $user->id
+        //     ], 200);
+        // } else {
+        //     return response()->json([
+        //         'error' => 'There was a problem sending the code, please try again later!',
+        //     ], 401);
+        // }
 
-        // $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('myapptoken')->plainTextToken;
 
-        // $response = [
-        //     'user' => $user,
-        //     'token' => $token,
-        // ];
+        $response = [
+             'user' => $user,
+             'token' => $token,
+        ];
 
-        // return response()->json($response, 201);
+        return response()->json($response, 201);
     }
 
     public function logout(Request $request)
